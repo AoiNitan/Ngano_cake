@@ -14,7 +14,17 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show]
   end
 
+  scope module: :public do
+    get 'customers/my_page' => "customers#show"
+    get 'customers/information/edit' => "customers#edit"
+    patch 'customers/information' => "customers#update"
+    get "customers/unsubscribe" => "customers#unsubscribe"
+    patch "customers/withdraw" => "customers#withdraw"
+  end
   
+  
+
+
   #管理者用
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
