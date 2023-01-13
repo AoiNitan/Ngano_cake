@@ -12,17 +12,30 @@ Rails.application.routes.draw do
 
   scope module: :public do
     resources :items, only: [:index, :show]
-  end
 
-  scope module: :public do
     get 'customers/my_page' => "customers#show"
     get 'customers/information/edit' => "customers#edit"
     patch 'customers/information' => "customers#update"
     get "customers/unsubscribe" => "customers#unsubscribe"
     patch "customers/withdraw" => "customers#withdraw"
+
+    resources :cart_items, only: [:index, :update, :destroy, :create] do
+      collection do
+        delete "destroy_all" => "cart_items#destroy_all"
+      end
+    end
+
+    resources :orders, only: [:new, :create, :index, :show] do
+      collection do
+        post "comfirm" => "orders#confirm"
+        get 'complete' => 'orders#complete'
+      end
+    end
+
+    resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end
-  
-  
+
+
 
 
   #管理者用
