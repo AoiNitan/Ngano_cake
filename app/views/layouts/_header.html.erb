@@ -1,13 +1,13 @@
 <header>
   <a class="navbar-brand p-3" href="/"><%= image_tag('cooltext427824454795598.png') %></a>
-</header>
+
 
 <% if customer_signed_in? %>
-  <ul class="nav col-lg-auto my-2  my-md-0">
+  <ul class="navbar navbar-expand-lg">
     <li class="welcome">ようこそ、<%= current_customer.last_name %>さん！</li>
   </ul>
 
-  <ul class="nav col-6 col-sm-3 col-lg-auto my-2 justify-content-center my-md-0">
+  <ul class="nav col-6 col-sm-auto col-lg-auto my-2 justify-content-end my-md-0">
     <li class="nav-item">
       <%= link_to "マイページ", customers_my_page_path, class: 'nav-link btn btn-light' %>
     </li>
@@ -16,13 +16,28 @@
       <%= link_to "商品一覧", items_path, class: 'nav-link btn btn-light' %>
     </li>
 
+    <li class="nav-item">
+      <%= link_to "カート", cart_items_path, class: 'nav-link bth bth-light' %>
+    </li>
 
+    <li class="nav-item">
+      <%= link_to "ログアウト", destroy_customer_session, method: :delete, class: 'nav-link bth bth-light' %>
+    </li>
   </ul>
+
 
 <% elsif admin_signed_in? %>
   <ul class="nav col-6 col-sm-3 col-lg-auto my-2 justify-content-center my-md-0">
     <li class="nav-item">
       <%= link_to "商品一覧", admin_items_path, class: 'nav-link btn btn-light' %>
+    </li>
+
+    <li class="nav-item">
+      <%= link_to "会員一覧", admin_customers_path, class: 'nav-link btn btn-light' %>
+    </li>
+
+    <li class="nav-item">
+
     </li>
   </ul>
 
@@ -30,11 +45,11 @@
 <% else %>
 <div class="row">
     <div class="col-md">
-      <ul class="nav col-6 col-sm-3 col-lg-auto my-2 justify-content-center my-md-0">
+      <ul class="nav col-6 col-sm-3 col-lg-auto my-2 justify-content-end my-md-0">
 
 
         <li class="nav-item">
-          <%= link_to "About", about_path, class: 'nav-link text-right btn btn-light' %>
+          <%= link_to "About", about_path, class: 'nav-link btn btn-right btn btn-light' %>
         </li>
 
         <li class="nav-item">
@@ -52,3 +67,5 @@
     </div>
   </div>
 <% end %>
+
+</header>
