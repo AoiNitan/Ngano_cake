@@ -1,0 +1,54 @@
+<header>
+  <a class="navbar-brand p-3" href="/"><%= image_tag('cooltext427824454795598.png') %></a>
+</header>
+
+<% if customer_signed_in? %>
+  <ul class="nav col-lg-auto my-2  my-md-0">
+    <li class="welcome">ようこそ、<%= current_customer.last_name %>さん！</li>
+  </ul>
+
+  <ul class="nav col-6 col-sm-3 col-lg-auto my-2 justify-content-center my-md-0">
+    <li class="nav-item">
+      <%= link_to "マイページ", customers_my_page_path, class: 'nav-link btn btn-light' %>
+    </li>
+
+    <li class="nav-item">
+      <%= link_to "商品一覧", items_path, class: 'nav-link btn btn-light' %>
+    </li>
+
+
+  </ul>
+
+<% elsif admin_signed_in? %>
+  <ul class="nav col-6 col-sm-3 col-lg-auto my-2 justify-content-center my-md-0">
+    <li class="nav-item">
+      <%= link_to "商品一覧", admin_items_path, class: 'nav-link btn btn-light' %>
+    </li>
+  </ul>
+
+
+<% else %>
+<div class="row">
+    <div class="col-md">
+      <ul class="nav col-6 col-sm-3 col-lg-auto my-2 justify-content-center my-md-0">
+
+
+        <li class="nav-item">
+          <%= link_to "About", about_path, class: 'nav-link text-right btn btn-light' %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to "商品一覧", items_path, class: 'nav-link btn btn-light' %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to "新規登録", new_customer_registration_path, class: 'nav-link btn btn-light' %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to "ログイン", new_customer_session_path, class: 'nav-link btn btn-light' %>
+        </li>
+      </ul>
+    </div>
+  </div>
+<% end %>
