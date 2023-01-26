@@ -1,5 +1,5 @@
 class Admin::ItemsController < ApplicationController
-  before_action :correct_admin
+ before_action :authenticate_admin!
 
   def new
     @item = Item.new
@@ -40,12 +40,6 @@ class Admin::ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:image, :name, :introduction, :genre_id, :price, :is_active)
-  end
-
-  def correct_admin
-    unless admin_signed_in?
-      redirect_to root_path
-    end
   end
 
 end
