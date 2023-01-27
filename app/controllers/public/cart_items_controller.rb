@@ -7,7 +7,7 @@ class Public::CartItemsController < ApplicationController
     current_cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
 
     if current_cart_item.present?
-      current_cart_item.quantity += params[:cart_item][:quantity].to_i
+      current_cart_item.amount += params[:cart_item][:amount].to_i
       current_cart_item.save
       redirect_to cart_items_path
     else
@@ -17,18 +17,38 @@ class Public::CartItemsController < ApplicationController
   end
 
   def index
+    @cart_items = current_customer.cart_items.all
+    @total = @cart_items.inject(0){|sum, item| sum + item.subtotal}
   end
 
   def update
-  end
+    cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
+    cart_item.amount = params[:cart_item][:amount].to_i
+    cart_item.save
 
-  def update
+    @cart_items = current_customer.cart_items.all
+    @total = @cart_items.inject(0){|sum, item| sum + item.subtotal}
   end
 
   def destroy
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.destroy
+
+    @cart_items = current_customer.cart_items.all
+    @total = @cart_items.inject(0){|sum, item| sum + item.subtotal}
   end
 
   def destroy_all
+    current_customer.cart_items.destroy_all
+
+    @cart_items = current_customer.cart_items.all
+    @total = @cart_items.inject(0){|sum, items| sum + item.subtotal}
+  end
+
+  private
+
+  def cart_item_params
+    params.require(:cart_item).permit(:items_id, :amount)
   end
 
 end

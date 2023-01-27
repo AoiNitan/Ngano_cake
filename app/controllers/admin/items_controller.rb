@@ -35,6 +35,16 @@ class Admin::ItemsController < ApplicationController
     end
   end
 
+  def search
+    keyword = params[:keyword]
+    if keyword == ""
+      redirect_to admin_items_path
+    else
+      @items = Item.search(keyword).page(params[:page]).per(8)
+    end
+  end
+
+
 
   private
 
