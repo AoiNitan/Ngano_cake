@@ -5,8 +5,13 @@ class OrderDetail < ApplicationRecord
 
   enum making_status: {impossible: 0,waiting: 1,making: 2,completed: 3}
 
+  validates :price, presence: true
+  validates :amount, presence: true
+  validates :making_status, presence: true
+
+
   def subtotal
-    item.price * amount
+    item.with_tax_price * amount
   end
 
 end
