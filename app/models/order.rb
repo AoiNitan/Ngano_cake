@@ -20,4 +20,8 @@ class Order < ApplicationRecord
     item.with_tax_price * order_detail.amount
   end
 
+  def total_amount
+    self.order_amounts.all.sum(:amount)
+  end
+
 end
