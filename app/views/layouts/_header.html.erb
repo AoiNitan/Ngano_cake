@@ -1,5 +1,5 @@
 <header>
-  <a class="navbar-brand p-3" href="/"><%= image_tag('cooltext427824454795598.png') %></a>
+<a class="navbar-brand p-3" href="/"><%= image_tag('cooltext427824454795598.png') %></a>
 
 
 <% if customer_signed_in? %>
@@ -9,11 +9,11 @@
 
   <ul class="nav col-6 col-sm-auto col-lg-auto my-2 justify-content-end my-md-0">
     <li class="nav-item">
-      <%= link_to "マイページ", customers_my_page_path, class: 'nav-link btn btn-light' %>
+      <%= link_to "マイページ", customers_my_page_path, class: 'mx-5 nav-link btn btn-light btn-sm mr-2' %>
     </li>
 
     <li class="nav-item">
-      <%= link_to "商品一覧", items_path, class: 'nav-link btn btn-light' %>
+      <%= link_to "商品一覧", items_path, class: 'nav-link btn btn-light btn-sm mr-2' %>
     </li>
 
     <li class="nav-item">
