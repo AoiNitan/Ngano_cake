@@ -2,19 +2,19 @@ class Public::AddressesController < ApplicationController
 
   before_action :authenticate_customer!
 
-  def create
-    @address = current_customer.addresses.new(addresses_params)
-    if @address.save
-      @address = current_customer.addresses.all
-    else
-      @address = current_customer.address.all
-      render :index
-    end
-  end
-
   def index
     @addresses = current_customer.addresses.all
     @address = Address.new
+  end
+
+  def create
+    @address = current_customer.addresses.new(addresses_params)
+    if @address.save
+      @addresses = current_customer.addresses.all
+    else
+      @addresses = current_customer.addresses.all
+      render :index
+    end
   end
 
   def edit
@@ -39,7 +39,7 @@ class Public::AddressesController < ApplicationController
   private
 
   def addresses_params
-    params.require(:address).permit(:name, :posttal_code, :address)
+    params.require(:address).permit(:name, :postal_code, :address)
   end
 
 end
