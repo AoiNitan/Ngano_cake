@@ -5,8 +5,51 @@
     </div>
   </div>
 
-  <div class="flex-row">
-    <h4 class="align-middle">登録情報</h4>
-    <%= link_to "編集する", customers_information_edit_path, class: "btn btn-success" %>
+  <div class="col-sm-8 mt-4 d-flex flex-row mb-3">
+    <h4 class="col-sm-4 align-middle">登録情報</h4>
+    <%= link_to "編集する", customers_information_edit_path, class: "col-sm-4 ml-5 btn btn-success" %>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 mt-4 ml-5">
+      <table class="table table-bordered">
+
+        <tr>
+          <th>氏名</th>
+          <td><%= @customer.full_blank_name %></td>
+        </tr>
+
+        <tr>
+          <th>カナ</th>
+          <td><%= @customer.full_blank_name_kana %></td>
+        </tr>
+
+        <tr>
+          <th>郵便番号</th>
+          <td><%= @customer.postal_code %></td>
+        </tr>
+
+        <tr>
+          <th>住所</th>
+          <td><%= @customer.address %></td>
+        </tr>
+
+        <tr>
+          <th>メールアドレス</th>
+          <td><%= @customer.email %></td>
+        </tr>
+
+      </table>
+    </div>
+  </div>
+
+  <div class="col-sm-8 mt-4 d-flex flex-row mb-3">
+    <h4 class="col-sm-4 align-middle">配送先</h4>
+    <%= link_to "一覧を見る", addresses_path, class: "col-sm-4 ml-5 btn btn-primary" %>
+  </div>
+
+  <div class="col-sm-8 d-flex flex-row mb-3">
+    <h4 class="col-sm-4 align-middle">注文履歴</h4>
+    <%= link_to "一覧を見る", orders_path, class: "sol-sm-4 ml-5 btn btn-primary" %>
   </div>
 </div>
