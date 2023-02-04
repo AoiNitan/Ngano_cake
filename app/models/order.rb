@@ -24,4 +24,8 @@ class Order < ApplicationRecord
     self.order_amounts.all.sum(:amount)
   end
 
+  def customer_full_address
+    "〒" + self.postal_code.to_s + " " + self.address
+  end
+
 end

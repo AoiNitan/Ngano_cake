@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <h5 class="p-3 mb-2 bg-light text-dark">注文情報入力</h5>
+    </div>
+  </div>
+
+  <%= from_with model: @order, url: new_order_path, local: true do |f| %>
+   <div class="row">
+     <div class="col-md-4">
+      <h5>支払方法</h5>
+      <ul>
+        <li>
+          <%= f.radio_button :payment_method, "credit_card" %>
+          <%= f.label :payment_method_credit_card, "クレジットカード" %>
+        </li>
+        <li>
+          <%= f.radio_button :payment_method, "transfer" %>
+          <%= f.label :payment_method_transfer, "銀行振込" %>
+        </li>
+      </ul>
+     </div>
+   </div>
+
+   <div class="row">
+      <div class="col-md-4">
+        <h5>お届け先</h5>
+        <ul>
+          <li>
+            <%= f.radio_button :address_selest, 0, checked: true %>
+            <%= f.label "ご自身の住所" %>
+          </li>
+          <li class="ml-3"><%= current_customer.customer_full_address %></li>
+          <li class="ml-3"><%= current_customer.name %></li>
+        </ul>
+      </div>
+    </div>
+
+    <% if current_customer.address.exists? %>
+     <div class="row">
+       <div class="col-md-4">
+        <ul>
+          <li>
+            <%= f.radio_button :address_select, 1 %>
+            <%= f.label "登録済住所から選択" %>
+          </li>
+          <li></li>
+        </ul>
+       </div>
+     </div>
+  <% end %>
+</div>
