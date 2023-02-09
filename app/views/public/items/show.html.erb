@@ -24,7 +24,7 @@
           <%= f.hidden_field :item_id, value: @item.id %>
             <div class="row">
               <div class="ml-2">
-                <%= f.select :amount, *[1..10] %>
+                <%= f.select :amount, *[1..10], include_blank: "個数選択" %>
               </div>
 
               <div class="d-flex ml-5">
