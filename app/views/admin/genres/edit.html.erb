@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mt-5">
+      <h5 class="p-3 mb-2 bg-light text-dark">ジャンル編集</h5>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 my-4">
+      <%= form_with model: @genre, url: edit_admin_genre_path, local: true do |f| %>
+        <div class="field mb-3">
+          <%= f.label "ジャンル名", class: "mr-5 font-weight-bold" %>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", size: "30x20" %>
+          <%= f.submit "変更を保存", class: "btn btn-action  btn-success px-3 pl-4" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
