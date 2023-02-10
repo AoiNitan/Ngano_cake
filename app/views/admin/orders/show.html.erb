@@ -8,12 +8,42 @@
   <div class="row">
     <div class="col-lg-8 mt-3">
       <table class="table">
-        <thead>
           <tr>
             <th class="font-weight-bold">購入者</th>
             <td><%= link_to @order.customer.full_blank_name, admin_customer_path(@order.customer), class: "link_text link_border" %></td>
           </tr>
-        </thead>
+
+          <tr>
+            <th class="font-weight-bold">注文日</th>
+            <td><%= @order.created_at.to_s(:date_jp) %></td>
+          </tr>
+
+          <tr>
+            <th class="font-weight-bold">配送先</th>
+            <td>
+              〒<%= @order.postal_code.to_s.insert(3, "-") %><%= @order.address %><br>
+              <%= @order.name %>
+            </td>
+          </tr>
+
+          <tr>
+            <th class="font-weight-bold">支払方法</th>
+            <td><%= @order.payment_method_i18n %></td>
+        </tr>
+
+        <tr>
+          <th class="font-weight-bold">注文ステータス</th>
+          <td>
+            <div class="row">
+              <%= form_with model: @order, admin_order_path(@order), local: true do |f| %>
+                <div class="d-flex flex-row">
+                  <%= f.select :status, @order.statuses_i18n.invert %>
+                  <%= f.submit "更新", class:"btn btn-success" %>
+                </div>
+              <% end %>
+            </div>
+          </td>
+        </tr>
       </table>
     </div>
   </div>
