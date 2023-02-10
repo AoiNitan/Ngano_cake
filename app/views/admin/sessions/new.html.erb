@@ -12,14 +12,14 @@
 
 
       <div class="form-group row">
-        <%= f.label :email, "メールアドレス", class: "col-sm-3" %>
+        <%= f.label "メールアドレス", class: "col-sm-3" %>
         <div class="col-sm-9">
           <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@examle.com", class: "form-control" %>
         </div>
       </div>
 
       <div class="form-group row">
-        <%= f.label :password, "パスワード", class: "col-sm-3" %>
+        <%= f.label "パスワード", class: "col-sm-3" %>
         <div class="col-sm-9">
           <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
         </div>
@@ -27,8 +27,7 @@
 
       <div class="col">
         <div class="action">
-          <%= link_to "ログイン",admin_path, class: "btn btn-primary position-absolute top-50 start-50" %>
-        </div>
+          <%= f.submit "ログイン", class: "btn btn-primary" %>
       </div>
 
       <% end %>

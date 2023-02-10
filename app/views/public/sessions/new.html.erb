@@ -22,11 +22,11 @@
 
         <div class="form-group row">
         <%= f.label "パスワード", class: "col-form-label col-md-4" %>
-        <%= f.password_field :password,autocomplete: "current_password", class: "form-control col-md-6" %>
+        <%= f.password_field :password, autocomplete: "current_password", class: "form-control col-md-6" %>
         </div>
 
         <div class="action">
-          <%= link_to "ログイン", items_path, class: "btn btn-primary col-md-3 offset-md-4 mt-3" %>
+          <%= f.submit "ログイン", class: "btn btn-primary" %>
         </div>
       <% end %>
     </div>
