@@ -18,12 +18,12 @@
           <% @cart_items.each do |cart_item| %>
             <tr>
               <td>
-                <%= attachment_image_tag cart_item.item, :image, fallback: "no_image.jpg", class: "small_wide_image_size" %>
+                <%= image_tag cart_item.item.image, format: 'jpeg', fallback: "no_image.jpg",class: "card-img-top bd-placeholder-img top_card_img" %>
               </td>
               <td colspan="3"><%= cart_item.item.name %></td>
               <td><%= cart_item.item.with_tax_price.to_s(:delimited) %></td>
               <td><%= cart_item.amount %></td>
-              <td><%= cart_item.subtotal>to_s(:delimited) %></td>
+              <td><%= cart_item.subtotal.to_s(:delimited) %></td>
             </tr>
           <% end %>
         </tbody>
@@ -84,7 +84,7 @@
 
   <div class="row mt-3">
     <div class="col-md-12 text-cnter">
-      <%= from_with model: @order, url: oreders_path, local: true do |f| %>
+      <%= form_with model: @order, url: orders_path, local: true do |f| %>
         <%= f.hidden_field :payment_method %>
         <%= f.hidden_field :address %>
         <%= f.hidden_field :postal_code %>

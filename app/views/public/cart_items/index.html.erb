@@ -1,4 +1,4 @@
-<% if cart_items.present? %>
+<% if @cart_items.present? %>
   <div class="row">
     <div class="col-md-8 mt-5">
       <h4 class="col-md-6">ショッピングカート</h4>
@@ -20,10 +20,10 @@
           <th></th>
         </thead>
         <tbody>
-          <% cart_items.each do |cart_item| %>
+          <% @cart_items.each do |cart_item| %>
             <tr>
               <td>
-                <%= attachment_image_tag cart_item.item, :image, fallback: "no_image.jpg", class: "small_wide_image_size" %>
+                <%= image_tag cart_item.item.image, format: 'jpeg', fallback: "no_image.jpg", size: "200x200" %>
               </td>
               <td colspan="2"><%= cart_item.item.name %></td>
               <td><%= cart_item.item.with_tax_price.to_s(:delimited) %></td>
@@ -52,7 +52,7 @@
       <table class="table table-bordered">
         <tr>
           <th>合計金額</th>
-          <td><%= total.round.to_s(:delimited) %></td>
+          <td><%= @total.round.to_s(:delimited) %></td>
         </tr>
       </table>
     </div>
@@ -63,6 +63,7 @@
       <<%= link_to "情報入力に進む",  new_order_path, class: "btn btn-success" %>
     </div>
   </div>
+
 <% else %>
   <div class="row">
     <div class="col-md-8 mt-5">

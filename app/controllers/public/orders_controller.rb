@@ -7,22 +7,22 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    order.customer_id = current_customer.id
+    @order.customer_id = current_customer.id
 
-    cart_items = current_customer.cart_items
-    @total = cart_items.inject(0) {|sum, item| sum + item.subtotal }
-    order.charge = @total + params[:order][:shipping_cost].to_i
+    @cart_items = current_customer.cart_items
+    @total_payment = @cart_items.inject(0) {|sum, item| sum + item.subtotal }
+    @order.total_payment = @total_payment
 
     if @order.save
-      cart_items.each do |cart_item|
+      @cart_items.each do |cart_item|
         order_detail = OrderDetail.new
-        order_detail.order_id = order.id
+        order_detail.order_id = @order.id
         order_detail.item_id = cart_item.item_id
         order_detail.price = cart_item.subtotal.to_s
         order_detail.amount = cart_item.amount
         order_detail.save
       end
-      cart_items.destroy.all
+      @cart_items.destroy_all
       redirect_to complete_orders_path
     else
       redirect_to new_order_path
@@ -39,7 +39,7 @@ class Public::OrdersController < ApplicationController
     @total_payment = @order_details.inject(0) { |sum, item| sum + item.subtotal}
   end
 
-  def comfirm
+  def confirm
     @order = Order.new
 
     @order.payment_method = params[:order][:payment_method]
@@ -51,7 +51,7 @@ class Public::OrdersController < ApplicationController
     if params[:order][:address_select] == "0"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
-      @order.name = current_customer.name
+      @order.name = current_customer.full_name
     elsif params[:order][:address_select] == "1"
       @order.postal_code = Address.find(params[:order][:address_id]).postal_code
       @order.address = Address.find(params[:order][:address_id]).address
