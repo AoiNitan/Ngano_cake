@@ -18,7 +18,7 @@ class Public::AddressesController < ApplicationController
   end
 
   def edit
-    @address = Adress.find(params[:id])
+    @address = Address.find(params[:id])
   end
 
   def update
@@ -26,7 +26,7 @@ class Public::AddressesController < ApplicationController
     if @address.update(address_params)
       redirect_to addresses_path
     else
-      render :index
+      render :edit
     end
   end
 
@@ -38,7 +38,7 @@ class Public::AddressesController < ApplicationController
 
   private
 
-  def addresses_params
+  def address_params
     params.require(:address).permit(:name, :postal_code, :address)
   end
 

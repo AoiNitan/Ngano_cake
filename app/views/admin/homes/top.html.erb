@@ -19,7 +19,7 @@
           <% @orders.each do |order| %>
           <tr>
             <td class="table-secondary"><%= link_to order.created_at.to_s(:datetime_jp), admin_order_path(order), class: "link_text link_border" %></td>
-            <td><%= link_to order.customer.full_name, search_admin_orders_path(customer_id: order.customer_id), class: "link_text" %></td>
+            <td><%= order.customer.full_name %></td>
             <td><%= order.total_amount %></td>
             <td><%= order.status_i18n %></td>
           </tr>

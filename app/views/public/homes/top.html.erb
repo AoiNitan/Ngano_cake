@@ -7,30 +7,27 @@
         会員でない方も商品の閲覧はできますが、<br>
         購入には会員登録が必要になります。
       </p>
-
       <h2 class="mb-3 mt-5">新着商品</h2>
     </div>
   </div>
 
-  <div class="flex-row col-md-12">
-    <div class="mr-3">
+  <div class="d-flex flex-row col-md-12">
+    <div class="col-12">
       <% @items.each do |item| %>
         <%= link_to item_path(item) do %>
           <%= image_tag item.image, format: 'jpeg', fallback: "no_image.jpg", size: "150x150" %>
         <% end %>
         <% if item.is_active == true %>
-          <div class="card-body top_card_style_body">
-            <h6 class="card-title"><%= item.name %></h6>
-              <p class="card-text">￥<%= item.with_tax_price.to_s(:delimited) %></p>
-          </div>
+            <h6 class="title"><%= item.name %></h6>
+            <p class="text">￥<%= item.with_tax_price.to_s(:delimited) %></p>
         <% end %>
       <% end %>
     </div>
+  </div>
 
-    <div class="row">
-      <div clas="text-right">
-        <%= link_to "全ての商品を見る＞", items_path, class: "link_text link_border" %>
-      </div>
+  <div class="row">
+    <div clas="text-right">
+      <%= link_to "全ての商品を見る＞", items_path, class: "link_text link_border" %>
     </div>
   </div>
 </div>

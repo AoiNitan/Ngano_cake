@@ -21,7 +21,7 @@ class Order < ApplicationRecord
   end
 
   def total_amount
-    self.order_amounts.all.sum(:amount)
+    self.order_details.all.sum(:amount)
   end
 
   def customer_full_address
