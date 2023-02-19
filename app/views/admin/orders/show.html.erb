@@ -38,7 +38,7 @@
             <div class="row">
               <%= form_with model: @order, url: admin_order_path(@order), local: true do |f| %>
                 <div class="d-flex flex-row">
-                  <%= f.select :order_status, options_for_select(Order.statuses, selected: Order.statuses[@order.status]) %>
+                  <%= f.select :status, Order.statuses_i18n.keys.map {|k| [I18n.t("enums.order.status.#{k}"), k]} %>
                   <%= f.submit "更新", class: "btn btn-success" %>
                 </div>
               <% end %>
@@ -68,7 +68,7 @@
           <td><%= order_detail.amount %></td>
           <td><%= order_detail.subtotal.to_s(:delimited) %></td>
           <%= form_with model: order_detail, url: admin_order_detail_path(order_detail), remote: true do |f| %>
-            <td><%= f.select :making_status, OrderDetail.making_statuses_i18n %></td>
+            <td><%= f.select :making_status, OrderDetail.making_statuses_i18n.keys.map {|k| [I18n.t("enums.order_detail.making_status.#{k}"), k]} %></td>
             <td><%= f.submit "更新", class: "btn btn-success" %></td>
           <% end %>
         </tr>

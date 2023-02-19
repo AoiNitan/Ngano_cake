@@ -11,7 +11,7 @@ class Admin::OrdersController < ApplicationController
 def update
     @order = Order.find(params[:id])
     @order.status = params[:order][:status]
-    @order.status.update(order_params)
+    @order.update(order_params)
     @order_details = @order.order_details
 
   if @order.status == "payment_confirmation"
@@ -22,7 +22,6 @@ def update
   end
     redirect_to request.referer
 end
-
 
   private
 

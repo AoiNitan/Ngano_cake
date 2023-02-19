@@ -8,7 +8,7 @@ class Public::AddressesController < ApplicationController
   end
 
   def create
-    @address = current_customer.addresses.new(addresses_params)
+    @address = current_customer.addresses.new(address_params)
     if @address.save
       @addresses = current_customer.addresses.all
     else

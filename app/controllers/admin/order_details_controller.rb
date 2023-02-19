@@ -2,6 +2,7 @@ class Admin::OrderDetailsController < ApplicationController
   before_action :authenticate_admin!
 
   def update
+    def update
     @order_detail = OrderDetail.find(params[:id])
     @order = @order_detail.order
     @order_details = @order.order_details
@@ -13,11 +14,12 @@ class Admin::OrderDetailsController < ApplicationController
       @order.save
     end
 
-    if @order.order_details.count == @order_details.where(making_status: "completed").conut
+    if @order.order_details.count == @order_details.where(making_status: "completed").count
       @order.status = "shipping_preparation"
       @order.save
     end
 
+    end
   end
 
 
